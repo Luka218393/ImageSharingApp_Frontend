@@ -4,7 +4,6 @@ import { ImageCard2 } from './../components/ImageCard'
 import { GrLinkNext } from "react-icons/gr";
 import { FiPlus } from "react-icons/fi"
 import { VideoCard2 } from "../components/VideoCard";
-import { Form } from "react-router-dom";
 import {uploadImageToCloudinary } from "../../api/cloudinary"
 
 

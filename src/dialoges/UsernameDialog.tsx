@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { Gallery } from "../../models/gallery";
 import { GrLinkNext } from "react-icons/gr";
 

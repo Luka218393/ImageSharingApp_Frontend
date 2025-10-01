@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 export const Navbar: React.FC = () => {
 
-  let [selectedPage, setSelectedPage] = useState<string>("Gallery")
+  //let [selectedPage, setSelectedPage] = useState<string>("Gallery")
 
   return (
     <nav className='w-fill h-fit p-6 bg-purple-800 sticky top-0 z-50 flex flex-row '>

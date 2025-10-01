@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { IoMdMore, IoMdDownload } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { downloadFile } from "../../api/Functions"

@@ -1,8 +1,4 @@
-import { useEffect, useState } from "react";
-import { IoMdMore, IoMdDownload } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
-import { downloadFile } from "../../api/Functions"
-import { FileContext } from "../../models/fileContext";
 import { FaPlay } from "react-icons/fa6";
 import ReactPlayer from 'react-player'
 
