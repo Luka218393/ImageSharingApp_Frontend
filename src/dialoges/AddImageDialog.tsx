@@ -4,13 +4,12 @@ import { ImageCard2 } from './../components/ImageCard'
 import { GrLinkNext } from "react-icons/gr";
 import { FiPlus } from "react-icons/fi"
 import { VideoCard2 } from "../components/VideoCard";
-import {uploadImageToCloudinary } from "../../api/cloudinary"
-
+import { postFiles } from "../../api/backend"
 
 /*
 A dialog that allows user to select, check and upload images to the server
 */
-export const AddImageDialog: React.FC<{ ImageUploadDialogTrigger: () => void, username: string, gallery_id: string }> = ({ ImageUploadDialogTrigger, username, gallery_id }) => {
+export const AddFilesDialog: React.FC<{ ImageUploadDialogTrigger: () => void, username: string, gallery_id: string }> = ({ ImageUploadDialogTrigger, username, gallery_id }) => {
 
     const disableParentOnClick = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -38,53 +37,6 @@ export const AddImageDialog: React.FC<{ ImageUploadDialogTrigger: () => void, us
         setVideos(temp)
     }
 
-    const postImages = async () => {
-        images.forEach(
-            async image => {
-
-                try {
-                    let [image_url, thumbnail_url] = await uploadImageToCloudinary(image)
-
-                    let formData = new FormData()
-                    formData.append("thumbnail_url", thumbnail_url)
-                    formData.append("file_url", image_url)
-                    formData.append("creator_name", username)
-                    formData.append("gallery_id", gallery_id)
-
-                    let response = await fetch("http://127.0.0.1:8000/image/",
-                        {
-                            method: "POST",
-                            body: formData
-                        }
-                    )
-
-                    console.log(await response.json())//Add confirmation dialog
-
-                } catch (error) {
-                    console.error('Upload error:', error);
-                }
-            }
-        )
-        //Upload videos later
-        // videos.forEach(
-        //     async video => {
-        //         let formData = new FormData()
-        //         formData.append("video", video)
-        //         formData.append("creator_name", username)
-        //         formData.append("gallery_id", gallery_id)
-        //         try {
-        //             let response = await fetch("http://127.0.0.1:8000/video/",
-        //                 {
-        //                     method: "POST",
-        //                     body: formData
-        //                 }
-        //             )
-        //             console.log(await response.json())//Add confirmation dialog
-        //         }
-        //         catch (e) { console.error(e) }
-        //     }
-        // )
-    }
 
     return (
         <>
@@ -110,7 +62,8 @@ export const AddImageDialog: React.FC<{ ImageUploadDialogTrigger: () => void, us
                         }
                     </div>
                     <div className='w-fill h-fit flex flex-row-reverse text-white justify-between'>
-                        <GrLinkNext className='cursor-pointer bg-purple-800 p-2 rounded-[10px]' size="64px" onClick={() => { postImages(); /*ImageUploadDialogTrigger()*/ }} />
+                        <GrLinkNext className='cursor-pointer bg-purple-800 p-2 rounded-[10px]' size="64px"
+                            onClick={() => { postFiles(images, videos, username, gallery_id); /*ImageUploadDialogTrigger()*/ }} />
                         <input
                             type="file"
                             multiple

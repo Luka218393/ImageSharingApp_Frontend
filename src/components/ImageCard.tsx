@@ -1,7 +1,7 @@
 import {  useState } from "react";
 import { IoMdMore, IoMdDownload } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
-import { downloadFile } from "../../api/Functions"
+import { deleteFile, downloadFile } from "../../api/backend"
 import type { FileContext } from "../../models/fileContext";
 import { FaPlay } from "react-icons/fa6";
 
@@ -13,17 +13,6 @@ export const FileCard: React.FC<{ fileContext: FileContext, previewFile: (fileUR
 
   let [dropdownVisibility, setDropdownVisibility] = useState<Boolean>(false)
   function dropdownVisibilityTrigger() { setDropdownVisibility(!dropdownVisibility) }
-
-
-  async function deleteFile() {
-    fetch(
-      `http://127.0.0.1:8000/delete/file/${fileContext.id}/`,
-      {
-        method: "DELETE"
-      }
-    ).then(response => console.log(response))
-
-  }
 
   return (
     <div className="w-[320px] h-fit relative flex flex-col"  onClick={() => previewFile(fileContext)}>
@@ -43,7 +32,7 @@ export const FileCard: React.FC<{ fileContext: FileContext, previewFile: (fileUR
         {dropdownVisibility &&
           (
             <div className="bg-black/45 absolute top-15 left-2 text-white p-2 rounded-md font-medium flex flex-col">
-              <button onClick={deleteFile} className="text-red-500 cursor-pointer hover:underline">Delete</button>
+              <button onClick={() => deleteFile(fileContext.id)} className="text-red-500 cursor-pointer hover:underline">Delete</button>
             </div>
           )
         }

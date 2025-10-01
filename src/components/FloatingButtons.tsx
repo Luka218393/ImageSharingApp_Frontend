@@ -1,7 +1,7 @@
 import { IoMdDownload } from "react-icons/io";
 import { FiPlus } from "react-icons/fi";
 import { useState } from "react";
-import { downloadFile } from "../../api/Functions";
+import { downloadFile } from "../../api/backend";
 
 export const FloatingButtons: React.FC<{ ImageUploadDialogTrigger: () => void, galleryId: string,  }> = ({ ImageUploadDialogTrigger, galleryId }) => {
 

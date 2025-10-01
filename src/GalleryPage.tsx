@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { FileCard } from './components/ImageCard'
-import { AddImageDialog } from './dialoges/AddImageDialog.tsx';
+import { AddFilesDialog } from './dialoges/AddImageDialog.tsx';
 //@ts-ignore
 import { FileContext } from '../models/fileContext.ts';
 import { PreviewFile } from './components/ImagePreview.tsx';
 import { FloatingButtons } from './components/FloatingButtons.tsx';
 import { useParams } from 'react-router-dom';
 import { Gallery } from '../models/gallery.ts';
+import { getFiles, getGallery } from '../api/backend.ts';
 
 
 /* 
@@ -25,22 +26,9 @@ export const GalleryPage: React.FC<{ username: string, setGallery: (gallery: Gal
 
     //Fetch image and thumbnail URLs from the backend & convert to object
     useEffect(() => {
-
+        getGallery(galleryId!, setGallery)
         //Add error handeling if the galleryId is not found
-        fetch(
-              `http://localhost:8000/gallery/${galleryId}`,
-              {
-                method: "GET"
-              }).then(response => response.json())
-              .then(gallery => setGallery(new Gallery(gallery)))
-
-        fetch(`http://127.0.0.1:8000/gallery/content/${galleryId}/`,
-            {
-                method: "GET",
-            }
-        ).then(response => response.json())
-            .then(data => data.map((item: { id: string; gallery_id: string; file_url: string; thumbnail_url: string; creator_name: string; extension: string; created: string; }) => new FileContext(item)))
-            .then(data => setFiles(data))
+        getFiles(galleryId!)
     }, []);
 
 
@@ -49,7 +37,7 @@ export const GalleryPage: React.FC<{ username: string, setGallery: (gallery: Gal
             {
                 imageUploadDialog &&
                 (
-                    <AddImageDialog ImageUploadDialogTrigger={ImageUploadDialogTrigger} username={username} gallery_id={galleryId!} />
+                    <AddFilesDialog ImageUploadDialogTrigger={ImageUploadDialogTrigger} username={username} gallery_id={galleryId!} />
                 )
             }
             {
