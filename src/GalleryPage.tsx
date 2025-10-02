@@ -29,13 +29,13 @@ export const GalleryPage: React.FC<{ username: string, setGallery: (gallery: Gal
 
         //Add error handeling if the galleryId is not found
         fetch(
-              `${backendURL}/gallery/${galleryId}`,
+              `https://luk4.eu.pythonanywhere.com/gallery/gallery/${galleryId}`,
               {
                 method: "GET"
               }).then(response => response.json())
               .then(gallery => setGallery(new Gallery(gallery)))
 
-        fetch(`${backendURL}/gallery/content/${galleryId}/`,
+        fetch(`https://luk4.eu.pythonanywhere.com/gallery/content/${galleryId}/`,
             {
                 method: "GET",
             }
