@@ -7,7 +7,7 @@ import { PreviewFile } from './components/ImagePreview.tsx';
 import { FloatingButtons } from './components/FloatingButtons.tsx';
 import { useParams } from 'react-router-dom';
 import { Gallery } from '../models/gallery.ts';
-import { getFiles, getGallery } from '../api/backend.ts';
+import { backendURL } from '../api/urls.ts';
 
 
 /* 
@@ -26,9 +26,22 @@ export const GalleryPage: React.FC<{ username: string, setGallery: (gallery: Gal
 
     //Fetch image and thumbnail URLs from the backend & convert to object
     useEffect(() => {
-        getGallery(galleryId!, setGallery)
+
         //Add error handeling if the galleryId is not found
-        getFiles(galleryId!)
+        fetch(
+              `${backendURL}/gallery/${galleryId}`,
+              {
+                method: "GET"
+              }).then(response => response.json())
+              .then(gallery => setGallery(new Gallery(gallery)))
+
+        fetch(`${backendURL}/gallery/content/${galleryId}/`,
+            {
+                method: "GET",
+            }
+        ).then(response => response.json())
+            .then(data => data.map((item: { id: string; gallery_id: string; file_url: string; thumbnail_url: string; creator_name: string; extension: string; created: string; }) => new FileContext(item)))
+            .then(data => setFiles(data))
     }, []);
 
 

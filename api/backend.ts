@@ -1,5 +1,3 @@
-import { FileContext } from "../models/fileContext";
-import { Gallery } from "../models/gallery";
 import { uploadImageToCloudinary } from "./cloudinary";
 import { backendURL } from "./urls";
 
@@ -49,39 +47,6 @@ export async function postFiles(
     //     }
     // )
   });
-}
-
-export async function getFiles(galleryId: string): Promise<FileContext[]> {
-  let response = await fetch(
-    `${backendURL}/gallery/content/${galleryId}/`,
-    {
-      method: "GET",
-    }
-  );
-  let data = await response.json();
-
-  return data.map(
-    (item: {
-      id: string;
-      gallery_id: string;
-      file_url: string;
-      thumbnail_url: string;
-      creator_name: string;
-      extension: string;
-      created: string;
-    }) => new FileContext(item)
-  );
-}
-
-export async function getGallery(galleryId: string, setGallery: (gallery:Gallery)=> void): Promise<string> {
-  let response = await fetch(`${backendURL}/gallery/${galleryId}`, {
-    method: "GET",
-  })
-
-  let data = await response.json()
-
-  setGallery(new Gallery(data))
-  return "Fetched gallery"
 }
 
 export function downloadFile(fileURL: string, name: string) {
