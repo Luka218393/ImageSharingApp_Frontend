@@ -1,15 +1,20 @@
-import { uploadImageToCloudinary } from "./cloudinary";
+import { uploadFileToCloudinary } from "./cloudinary";
 import { backendURL } from "./urls";
 
-export async function postFiles(
+/*
+Posting files to internet:
+First files are being posted to cloudinary server,
+then file info is being stored on django backend
+*/
+export async function postFiles( //add fail handling, rename link to file
   images: File[],
   videos: File[],
   username: string,
   gallery_id: string
 ) {
-  images.forEach(async (image) => {
+  [...images, ...videos].forEach(async (image) => {
     try {
-      let [image_url, thumbnail_url] = await uploadImageToCloudinary(image);
+      let [image_url, thumbnail_url] = await uploadFileToCloudinary(image);
 
       let formData = new FormData();
       formData.append("thumbnail_url", thumbnail_url);
@@ -21,34 +26,14 @@ export async function postFiles(
         method: "POST",
         body: formData,
       });
-
-      console.log(await response.json()); //Add confirmation dialog
+      console.log(await response.json());
     } catch (error) {
       console.error("Upload error:", error);
     }
-    videos
-    //Upload videos later
-    // videos.forEach(
-    //     async video => {
-    //         let formData = new FormData()
-    //         formData.append("video", video)
-    //         formData.append("creator_name", username)
-    //         formData.append("gallery_id", gallery_id)
-    //         try {
-    //             let response = await fetch("http://127.0.0.1:8000/video/",
-    //                 {
-    //                     method: "POST",
-    //                     body: formData
-    //                 }
-    //             )
-    //             console.log(await response.json())//Add confirmation dialog
-    //         }
-    //         catch (e) { console.error(e) }
-    //     }
-    // )
   });
 }
 
+//Function that downloads contents of a link
 export function downloadFile(fileURL: string, name: string) {
   console.log(fileURL);
   fetch(fileURL, { mode: "cors" })
@@ -65,6 +50,7 @@ export function downloadFile(fileURL: string, name: string) {
     .catch(console.error);
 }
 
+//Fix this later
 export async function deleteFile(fileId: string) {
   //add deletion of file on cloudinary
   fetch(`${backendURL}/delete/file/${fileId}/`, {

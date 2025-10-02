@@ -1,21 +1,22 @@
-import { IoMdDownload } from "react-icons/io";
 import { FiPlus } from "react-icons/fi";
-import { useState } from "react";
-import { downloadFile } from "../../api/backend";
+import { useEffect } from "react";
 
+/*
+
+*/
 export const FloatingButtons: React.FC<{ ImageUploadDialogTrigger: () => void, galleryId: string,  }> = ({ ImageUploadDialogTrigger, galleryId }) => {
 
-    let [downloadDialog, setDownloadDialog] = useState<Boolean>(false)
-    function ToggleDownloadDialog() { setDownloadDialog(!downloadDialog) }
-    function download(){}
-    function downloadAll(){
-        downloadFile(`http://127.0.0.1:8000/download/${galleryId}/`, galleryId)
-    }
-
+    // let [downloadDialog, setDownloadDialog] = useState<Boolean>(false)
+    // function ToggleDownloadDialog() { setDownloadDialog(!downloadDialog) }
+    // function download(){}
+    // function downloadAll(){
+    //     downloadFile(`/`, galleryId)
+    // }
+    useEffect(()=>{galleryId},[])
 
     return (
         <div className="fixed w-fit h-fit flex flex-col gap-4 right-4 bottom-4 justify-center items-center">
-            <div>
+            {/* <div>
                 {
                     downloadDialog &&
                     (
@@ -35,7 +36,7 @@ export const FloatingButtons: React.FC<{ ImageUploadDialogTrigger: () => void, g
                 >
                     <IoMdDownload className=" text-[13vw] sm:text-[9vw] md:text-[6vw] lg:text-[5vw] text-white" />
                 </button>
-            </div>
+            </div> */}
 
             <button
                 type="button"

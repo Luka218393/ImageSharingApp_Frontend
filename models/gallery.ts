@@ -1,4 +1,3 @@
-
 export class Gallery {
   id: string;
   creator_id: string | null;

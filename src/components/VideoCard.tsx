@@ -2,6 +2,7 @@ import { IoClose } from "react-icons/io5";
 import { FaPlay } from "react-icons/fa6";
 import ReactPlayer from 'react-player'
 
+
 export const VideoCard2: React.FC<{ video: File, removeVideo: (name: string) => void }> = ({ video, removeVideo }) => {
     return (
         <div className="w-[320px] h-fit relative flex flex-col">

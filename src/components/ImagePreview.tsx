@@ -1,7 +1,9 @@
 import type { FileContext } from "../../models/fileContext"
 import ReactPlayer from 'react-player';
 
-
+/*
+Shows a preview of the image or video
+*/
 export const PreviewFile: React.FC<{ file: FileContext, filePreviewTrigger: (imageURL: FileContext | null) => void }> = ({ file, filePreviewTrigger }) => {
 
     if (file.extension != ".mp4") {

@@ -7,7 +7,7 @@ import { FaPlay } from "react-icons/fa6";
 
 
 /*
-Conponents that display image 
+Conponents that display file 
 */
 export const FileCard: React.FC<{ fileContext: FileContext, previewFile: (fileURL: FileContext) => void }> = ({ fileContext, previewFile }) => {
 

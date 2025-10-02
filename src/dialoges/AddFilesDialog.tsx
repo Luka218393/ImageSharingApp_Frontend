@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { ChangeEvent } from "react";
-import { ImageCard2 } from './../components/ImageCard'
+import { ImageCard2 } from '../components/ImageCard'
 import { GrLinkNext } from "react-icons/gr";
 import { FiPlus } from "react-icons/fi"
 import { VideoCard2 } from "../components/VideoCard";

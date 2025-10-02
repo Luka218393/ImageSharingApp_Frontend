@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FileCard } from './components/ImageCard'
-import { AddFilesDialog } from './dialoges/AddImageDialog.tsx';
+import { AddFilesDialog } from './dialoges/AddFilesDialog.tsx';
 //@ts-ignore
 import { FileContext } from '../models/fileContext.ts';
 import { PreviewFile } from './components/ImagePreview.tsx';
