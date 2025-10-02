@@ -37,7 +37,7 @@ export const GalleryPage: React.FC<{ username: string, setGallery: (gallery: Gal
 
         fetch(`https://luk4.eu.pythonanywhere.com/gallery/content/${galleryId}/`,
             {
-                method: "GET",
+                method: "POST",
             }
         ).then(response => response.json())
             .then(data => data.map((item: { id: string; gallery_id: string; file_url: string; thumbnail_url: string; creator_name: string; extension: string; created: string; }) => new FileContext(item)))
