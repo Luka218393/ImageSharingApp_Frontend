@@ -26,7 +26,7 @@ export const GalleryPage: React.FC<{ username: string, setGallery: (gallery: Gal
 
     //Fetch image and thumbnail URLs from the backend & convert to object
     useEffect(() => {
-
+        backendURL
         //Add error handeling if the galleryId is not found
         fetch(
               `https://luk4.eu.pythonanywhere.com/gallery/gallery/${galleryId}`,
