@@ -26,7 +26,7 @@ export async function postFiles(
     } catch (error) {
       console.error("Upload error:", error);
     }
-
+    videos
     //Upload videos later
     // videos.forEach(
     //     async video => {
